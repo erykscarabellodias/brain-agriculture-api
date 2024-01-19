@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=pg
+      - POSTGRES_PASSWORD=pg@brain-agriculture-app
+      - POSTGRES_DB=brain-agriculture-app
+    volumes:
+      - pg:/var/lib/postgresql
+
+volumes:
+  pg:
+    driver: local
