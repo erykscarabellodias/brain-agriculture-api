@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import Fazenda from "../../fazendas/entities/Fazenda";
 
 @Entity({ name: "produtores" })
 export class Produtor {
@@ -16,4 +17,7 @@ export class Produtor {
 
   @Column()
   ativo: boolean;
+
+  @OneToMany(() => Fazenda, (fazenda) => fazenda.produtor)
+  fazendas: Fazenda[];
 }

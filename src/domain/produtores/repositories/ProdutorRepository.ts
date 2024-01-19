@@ -27,4 +27,8 @@ export default class ProdutorRepository {
   async buscarPorCnpj(cnpj: string): Promise<Produtor | null> {
     return this.repository.findOneBy({ cnpj });
   }
+
+  async buscarPorId(idProdutor: string) {
+    return this.repository.findOneBy({ id: idProdutor });
+  }
 }

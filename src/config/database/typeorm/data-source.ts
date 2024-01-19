@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { DataSource } from "typeorm";
 import { Produtor } from "../../../domain/produtores/entities/Produtor";
+import Fazenda from "../../../domain/fazendas/entities/Fazenda";
 
 export const appDataSource = new DataSource({
   type: "postgres",
@@ -11,7 +12,7 @@ export const appDataSource = new DataSource({
   database: process.env.DB_NAME,
   synchronize: false,
   logging: false,
-  entities: [Produtor],
+  entities: [Produtor, Fazenda],
   subscribers: [],
   migrations: ["src/shared/migrations/typeorm/*.ts"],
 });

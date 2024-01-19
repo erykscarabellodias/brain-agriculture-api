@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import { Produtor } from "../../produtores/entities/Produtor";
 
 @Entity({ name: "fazendas" })
 export default class Fazenda {
@@ -25,4 +26,7 @@ export default class Fazenda {
 
   @Column()
   ativo: boolean;
+
+  @ManyToOne(() => Produtor, (produtor) => produtor.fazendas)
+  produtor: Produtor;
 }
