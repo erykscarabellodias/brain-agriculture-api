@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryColumn,
+} from "typeorm";
 import { Produtor } from "../../produtores/entities/Produtor";
 
 @Entity({ name: "fazendas" })
@@ -24,8 +30,8 @@ export default class Fazenda {
   @Column()
   hectaresVegetacao: number;
 
-  @Column()
-  ativo: boolean;
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
   @ManyToOne(() => Produtor, (produtor) => produtor.fazendas)
   produtor: Produtor;

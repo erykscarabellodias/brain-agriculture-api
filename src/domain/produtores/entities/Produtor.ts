@@ -1,4 +1,10 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  DeleteDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
 import Fazenda from "../../fazendas/entities/Fazenda";
 
 @Entity({ name: "produtores" })
@@ -15,8 +21,8 @@ export class Produtor {
   @Column({ nullable: true, unique: true })
   cnpj?: string;
 
-  @Column()
-  ativo: boolean;
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
   @OneToMany(() => Fazenda, (fazenda) => fazenda.produtor)
   fazendas: Fazenda[];

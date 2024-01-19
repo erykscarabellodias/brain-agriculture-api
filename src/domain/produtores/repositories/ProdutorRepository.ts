@@ -16,7 +16,6 @@ export default class ProdutorRepository {
       nomeProdutor,
       cpf,
       cnpj,
-      ativo: true,
     });
   }
 
@@ -30,5 +29,15 @@ export default class ProdutorRepository {
 
   async buscarPorId(idProdutor: string) {
     return this.repository.findOneBy({ id: idProdutor });
+  }
+
+  async listar(desativadas: boolean) {
+    const queryBuilder = this.repository.createQueryBuilder();
+
+    if (desativadas) {
+      queryBuilder.withDeleted();
+    }
+
+    return queryBuilder.getMany();
   }
 }

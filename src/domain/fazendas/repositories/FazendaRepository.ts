@@ -28,7 +28,6 @@ export default class FazendaRepository {
       hectaresAgricultaveis,
       hectaresVegetacao,
       totalDeHectares,
-      ativo: true,
       produtor: produtor,
     });
   }

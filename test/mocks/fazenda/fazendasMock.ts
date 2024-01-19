@@ -6,13 +6,13 @@ const fazendaMock = jest.fn().mockReturnValue({
   hectaresAgricultaveis: 1000,
   hectaresVegetacao: 400,
   totalDeHectares: 800,
-  ativo: true,
+  deletedAt: null,
   produtor: {
     id: "a4d73e8e-d90d-4663-b290-c6a89d431f32",
     nomeProdutor: "João",
     cpf: "097.772.810-21",
     cnpj: null,
-    ativo: true,
+    deletedAt: null,
   },
 });
 

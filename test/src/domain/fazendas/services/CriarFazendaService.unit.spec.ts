@@ -194,9 +194,9 @@ describe("suite de testes da criação de fazendas", () => {
     expect(fazendaCriada).toHaveProperty("hectaresAgricultaveis");
     expect(fazendaCriada).toHaveProperty("hectaresVegetacao");
     expect(fazendaCriada).toHaveProperty("totalDeHectares");
-    expect(fazendaCriada).toHaveProperty("ativo");
+    expect(fazendaCriada).toHaveProperty("deletedAt");
     expect(fazendaCriada).toHaveProperty("produtor");
 
-    expect(fazendaCriada.ativo).toBeTruthy();
+    expect(fazendaCriada.deletedAt).toBeNull();
   });
 });
