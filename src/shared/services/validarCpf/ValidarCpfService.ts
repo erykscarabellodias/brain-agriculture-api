@@ -73,9 +73,15 @@ export default class ValidarCpfService {
     const restoDaDivisaoDeVerificacao =
       (multiplicacaoDosNovePrimeirosDigitos * 10) % 11;
 
-    if (
-      restoDaDivisaoDeVerificacao.toString() !== this.digitosVerificadores[0]
-    ) {
+    let digitoVerificador;
+
+    if (restoDaDivisaoDeVerificacao == 10) {
+      digitoVerificador = 0;
+    } else {
+      digitoVerificador = restoDaDivisaoDeVerificacao;
+    }
+
+    if (digitoVerificador.toString() !== this.digitosVerificadores[0]) {
       throw new AppError(400, "CPF inválido");
     }
   }
@@ -97,9 +103,15 @@ export default class ValidarCpfService {
     const restoDaDivisaoDeVerificacao =
       (multiplicacaoDosDezPrimeirosDigitos * 10) % 11;
 
-    if (
-      restoDaDivisaoDeVerificacao.toString() !== this.digitosVerificadores[1]
-    ) {
+    let digitoVerificador;
+
+    if (restoDaDivisaoDeVerificacao == 10) {
+      digitoVerificador = 0;
+    } else {
+      digitoVerificador = restoDaDivisaoDeVerificacao;
+    }
+
+    if (digitoVerificador.toString() !== this.digitosVerificadores[1]) {
       throw new AppError(400, "CPF inválido");
     }
   }
