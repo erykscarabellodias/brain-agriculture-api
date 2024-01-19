@@ -12,7 +12,7 @@ export default class ValidarCnpjService {
     this.separarDozePrimeirosDigitos();
     this.separarDigitosVerificadores();
 
-    // this.validarPrimeiroDigito();
+    this.validarPrimeiroDigito();
     this.validarSegundoDigito();
   }
 
@@ -31,8 +31,6 @@ export default class ValidarCnpjService {
     const cpfSemPontos = this.cnpjComMascara.replace(/[./]/g, "");
 
     this.dozePrimeirosDigitos = cpfSemPontos.substring(0, 12);
-
-    console.log(this.dozePrimeirosDigitos);
   }
 
   private separarDigitosVerificadores() {
