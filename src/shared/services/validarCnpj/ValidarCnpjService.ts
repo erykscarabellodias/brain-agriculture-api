@@ -22,7 +22,7 @@ export default class ValidarCnpjService {
     if (!regex.test(this.cnpjComMascara)) {
       throw new AppError(
         400,
-        "Envie o CNPJ no formato 70.585.179/0001-71, com os pontos e o traço"
+        "Envie o CNPJ no formato 70.585.179/0001-71, com os pontos, a barra e o traço"
       );
     }
   }
