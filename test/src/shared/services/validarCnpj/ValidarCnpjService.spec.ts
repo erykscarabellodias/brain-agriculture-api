@@ -1,5 +1,5 @@
-import { AppError } from "../../../../src/shared/erros/app.error";
-import ValidarCnpjService from "../../../../src/shared/services/validarCnpj/ValidarCnpjService";
+import { AppError } from "../../../../../src/shared/erros/app.error";
+import ValidarCnpjService from "../../../../../src/shared/services/validarCnpj/ValidarCnpjService";
 
 describe("suite de testes da validação de CPF", () => {
   const service = new ValidarCnpjService();
