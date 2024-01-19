@@ -65,7 +65,7 @@ export class CriarProdutorService {
       if (usuarioComMesmoCpfJaExiste) {
         throw new AppError(
           400,
-          "Já existe um usuário com este CPF cadastrado na plataforma"
+          "Já existe um produtor com este CPF cadastrado na plataforma"
         );
       }
     }
@@ -80,7 +80,7 @@ export class CriarProdutorService {
       if (usuarioComMesmoCnpjJaExiste) {
         throw new AppError(
           400,
-          "Já existe um usuário com este CNPJ cadastrado na plataforma"
+          "Já existe um produtor com este CNPJ cadastrado na plataforma"
         );
       }
     }
