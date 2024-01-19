@@ -34,40 +34,14 @@ export class CriarProdutorService {
 
     const { nomeProdutor, cpf, cnpj } = criarProdutorInputDto;
 
-    this.validarRecebimentoDoCpfOuCnpj(criarProdutorInputDto);
-
-    if (cpf) {
-      const usuarioComMesmoCpfJaExiste = await this.repository.buscarPorCpf(
-        cpf
-      );
-
-      if (usuarioComMesmoCpfJaExiste) {
-        throw new AppError(
-          400,
-          "Já existe um usuário com este CPF cadastrado na plataforma"
-        );
-      }
-    }
-
-    if (cnpj) {
-      const usuarioComMesmoCnpjJaExiste = await this.repository.buscarPorCnpj(
-        cnpj
-      );
-
-      if (usuarioComMesmoCnpjJaExiste) {
-        throw new AppError(
-          400,
-          "Já existe um usuário com este CNPJ cadastrado na plataforma"
-        );
-      }
-    }
+    await this.validarRecebimentoDoCpfOuCnpj(criarProdutorInputDto);
 
     return await this.repository.criar(nomeProdutor, cpf, cnpj);
   }
 
-  private validarRecebimentoDoCpfOuCnpj(
+  private async validarRecebimentoDoCpfOuCnpj(
     criarProdutorInputDto: CriarProdutorInputDto
-  ): void {
+  ): Promise<void> {
     const { cpf, cnpj } = criarProdutorInputDto;
 
     if (cpf && cnpj) {
@@ -83,10 +57,32 @@ export class CriarProdutorService {
 
     if (cpf) {
       this.validarCpfService.validar(cpf);
+
+      const usuarioComMesmoCpfJaExiste = await this.repository.buscarPorCpf(
+        cpf
+      );
+
+      if (usuarioComMesmoCpfJaExiste) {
+        throw new AppError(
+          400,
+          "Já existe um usuário com este CPF cadastrado na plataforma"
+        );
+      }
     }
 
     if (cnpj) {
       this.validarCnpjService.validar(cnpj);
+
+      const usuarioComMesmoCnpjJaExiste = await this.repository.buscarPorCnpj(
+        cnpj
+      );
+
+      if (usuarioComMesmoCnpjJaExiste) {
+        throw new AppError(
+          400,
+          "Já existe um usuário com este CNPJ cadastrado na plataforma"
+        );
+      }
     }
   }
 }
