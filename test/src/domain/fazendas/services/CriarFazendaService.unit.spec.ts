@@ -4,10 +4,7 @@ import DadosFazendaInputDto from "../../../../../src/domain/fazendas/services/dt
 import ProdutorRepository from "../../../../../src/domain/produtores/repositories/ProdutorRepository";
 import { AppError } from "../../../../../src/shared/erros/app.error";
 import ValidarUuidService from "../../../../../src/shared/services/validarUuid/ValidarUuidService";
-import {
-  produtorMock,
-  produtorNaoEncontradoMock,
-} from "../../../../mocks/produtor/produtoresMock";
+import { produtorMock } from "../../../../mocks/produtor/produtoresMock";
 import ClassValidatorError from "../../../../../src/shared/erros/class.validator.error";
 import {
   fazendaMock,
