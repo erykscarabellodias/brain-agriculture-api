@@ -22,7 +22,7 @@ export class Produtor {
   cnpj?: string;
 
   @DeleteDateColumn()
-  deletedAt?: Date;
+  deletedAt?: Date | null;
 
   @OneToMany(() => Fazenda, (fazenda) => fazenda.produtor)
   fazendas: Fazenda[];

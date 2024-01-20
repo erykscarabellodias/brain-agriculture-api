@@ -51,4 +51,11 @@ export default class ProdutorRepository {
 
     return produtor;
   }
+
+  async reativar(produtor: Produtor): Promise<Produtor> {
+    produtor.deletedAt = null;
+    this.repository.save(produtor);
+
+    return produtor;
+  }
 }
