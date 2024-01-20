@@ -7,35 +7,35 @@ import apagarProdutor from "../controllers/produtores/apagarProdutor";
 import reativarProdutor from "../controllers/produtores/reativarProdutor";
 import editarProdutor from "../controllers/produtores/editarProdutor";
 
-const produtoresRouter = Router();
+const produtoresRoutes = Router();
 
-produtoresRouter.post("/", criarProdutor.criar.bind(criarProdutor));
+produtoresRoutes.post("/", criarProdutor.criar.bind(criarProdutor));
 
-produtoresRouter.post(
+produtoresRoutes.post(
   "/:idProdutor/fazendas",
   criarFazenda.criar.bind(criarFazenda)
 );
 
-produtoresRouter.get("/", listarProdutores.listar.bind(listarProdutores));
+produtoresRoutes.get("/", listarProdutores.listar.bind(listarProdutores));
 
-produtoresRouter.get(
+produtoresRoutes.get(
   "/:idProdutor",
   detalharProdutor.detalhar.bind(detalharProdutor)
 );
 
-produtoresRouter.delete(
+produtoresRoutes.delete(
   "/:idProdutor",
   apagarProdutor.apagar.bind(apagarProdutor)
 );
 
-produtoresRouter.patch(
+produtoresRoutes.patch(
   "/:idProdutor/reativar",
   reativarProdutor.reativar.bind(reativarProdutor)
 );
 
-produtoresRouter.put(
+produtoresRoutes.put(
   "/:idProdutor",
   editarProdutor.editar.bind(editarProdutor)
 );
 
-export default produtoresRouter;
+export default produtoresRoutes;

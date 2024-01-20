@@ -1,8 +1,8 @@
 import { Router } from "express";
-import produtoresRouter from "./produtoresRoutes";
+import produtoresRoutes from "./produtoresRoutes";
 
 const routes = Router();
 
-routes.use("/produtores", produtoresRouter);
+routes.use("/produtores", produtoresRoutes);
 
 export { routes };
