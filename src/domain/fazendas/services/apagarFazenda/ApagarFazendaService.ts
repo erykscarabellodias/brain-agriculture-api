@@ -13,16 +13,16 @@ export default class ApagarFazendaService {
   async apagar(idProdutor: string): Promise<Fazenda> {
     this.validarUuidService.validar(idProdutor);
 
-    const Fazenda = await this.fazendaRepository.buscarPorId(idProdutor);
+    const fazenda = await this.fazendaRepository.buscarPorId(idProdutor);
 
-    if (!Fazenda) {
+    if (!fazenda) {
       throw new AppError(404, "Esta fazenda não existe");
     }
 
-    if (Fazenda.deletedAt) {
+    if (fazenda.deletedAt) {
       throw new AppError(400, "Esta fazenda já está desativada");
     }
 
-    return await this.fazendaRepository.apagar(Fazenda);
+    return await this.fazendaRepository.apagar(fazenda);
   }
 }
