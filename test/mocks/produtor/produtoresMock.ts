@@ -7,6 +7,15 @@ const produtorMock = jest.fn().mockReturnValue({
   fazendas: [],
 });
 
+const produtorApagadoMock = jest.fn().mockReturnValue({
+  id: "a4d73e8e-d90d-4663-b290-c6a89d431f32",
+  nomeProdutor: "João",
+  cpf: "097.772.810-21",
+  cnpj: null,
+  deletedAt: "2024-01-20T11:51:27.467Z",
+  fazendas: [],
+});
+
 const produtorNaoEncontrado = jest.fn().mockReturnValue(null);
 
 const listaDeProdutoresAtivosMock = jest.fn().mockReturnValue([
@@ -46,4 +55,5 @@ export {
   produtorNaoEncontrado,
   listaDeProdutoresAtivosMock,
   listaDeProdutoresVazia,
+  produtorApagadoMock,
 };

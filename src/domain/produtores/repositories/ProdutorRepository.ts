@@ -44,4 +44,11 @@ export default class ProdutorRepository {
 
     return queryBuilder.getMany();
   }
+
+  async apagar(produtor: Produtor): Promise<Produtor> {
+    produtor.deletedAt = new Date();
+    this.repository.save(produtor);
+
+    return produtor;
+  }
 }
