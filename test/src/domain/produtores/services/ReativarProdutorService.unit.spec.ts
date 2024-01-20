@@ -5,7 +5,7 @@ import ValidarUuidService from "../../../../../src/shared/services/validarUuid/V
 import {
   produtorApagadoMock,
   produtorMock,
-  produtorNaoEncontrado,
+  produtorNaoEncontradoMock,
 } from "../../../../mocks/produtor/produtoresMock";
 
 describe("suíte de testes do service de reativação de produtores", () => {
@@ -17,7 +17,7 @@ describe("suíte de testes do service de reativação de produtores", () => {
   );
 
   it("não deve ser possível reativar um produtor que não existe", async () => {
-    produtorRepository.buscarPorId = produtorNaoEncontrado;
+    produtorRepository.buscarPorId = produtorNaoEncontradoMock;
 
     expect(async () => {
       await reativarProdutorService.reativar(

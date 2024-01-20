@@ -7,7 +7,7 @@ import { AppError } from "../../../../../src/shared/erros/app.error";
 import ValidarUuidService from "../../../../../src/shared/services/validarUuid/ValidarUuidService";
 import {
   produtorMock,
-  produtorNaoEncontrado,
+  produtorNaoEncontradoMock,
 } from "../../../../mocks/produtor/produtoresMock";
 import ClassValidatorError from "../../../../../src/shared/erros/class.validator.error";
 import {
@@ -26,7 +26,7 @@ describe("suite de testes da criação de fazendas", () => {
   );
 
   it("não deve ser possível criar uma fazenda para um produtor que não existe", async () => {
-    produtorRepository.buscarPorId = produtorNaoEncontrado;
+    produtorRepository.buscarPorId = produtorNaoEncontradoMock;
 
     const fazenda: CriarFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",

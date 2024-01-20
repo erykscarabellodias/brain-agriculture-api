@@ -2,7 +2,7 @@ import ProdutorRepository from "../../../../../src/domain/produtores/repositorie
 import ListarProdutoresService from "../../../../../src/domain/produtores/services/listarProdutores/ListarProdutoresService";
 import {
   listaDeProdutoresAtivosMock,
-  listaDeProdutoresVazia,
+  listaDeProdutoresVaziaMock,
 } from "../../../../mocks/produtor/produtoresMock";
 
 describe("suíte de testes da listagem de produtores", () => {
@@ -22,7 +22,7 @@ describe("suíte de testes da listagem de produtores", () => {
   });
 
   it("deve retornar uma lista vazia se não existirem registros", async () => {
-    repository.listar = listaDeProdutoresVazia;
+    repository.listar = listaDeProdutoresVaziaMock;
 
     const produtores = await service.listar(true);
 

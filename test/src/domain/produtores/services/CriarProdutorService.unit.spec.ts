@@ -6,7 +6,7 @@ import ValidarCnpjService from "../../../../../src/shared/services/validarCnpj/V
 import ValidarCpfService from "../../../../../src/shared/services/validarCpf/ValidarCpfService";
 import {
   produtorMock,
-  produtorNaoEncontrado,
+  produtorNaoEncontradoMock,
 } from "../../../../mocks/produtor/produtoresMock";
 
 describe("suíte de testes da criação de produtores", () => {

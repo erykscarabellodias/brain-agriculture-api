@@ -58,4 +58,35 @@ export default class ProdutorRepository {
 
     return produtor;
   }
+
+  async atualizar(
+    produtor: Produtor,
+    nomeProdutor: string,
+    cpf: string,
+    cnpj: string
+  ): Promise<Produtor> {
+    produtor.nomeProdutor = nomeProdutor;
+    produtor.cpf = cpf;
+    produtor.cnpj = cnpj;
+
+    return this.repository.save(produtor);
+  }
+
+  async buscarOutroProdutorComOMesmoCpf(produtor: Produtor, cpf: string) {
+    return this.repository
+      .createQueryBuilder()
+      .where("id <> :id", { id: produtor.id })
+      .andWhere("cpf = :cpf", { cpf })
+      .withDeleted()
+      .getOne();
+  }
+
+  async buscarOutroProdutorComOMesmoCnpj(produtor: Produtor, cnpj: string) {
+    return this.repository
+      .createQueryBuilder()
+      .where("id <> :id", { id: produtor.id })
+      .andWhere("cnpj = :cnpj", { cnpj })
+      .withDeleted()
+      .getOne();
+  }
 }

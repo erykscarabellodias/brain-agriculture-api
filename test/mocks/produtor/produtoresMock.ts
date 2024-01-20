@@ -16,7 +16,7 @@ const produtorApagadoMock = jest.fn().mockReturnValue({
   fazendas: [],
 });
 
-const produtorNaoEncontrado = jest.fn().mockReturnValue(null);
+const produtorNaoEncontradoMock = jest.fn().mockReturnValue(null);
 
 const listaDeProdutoresAtivosMock = jest.fn().mockReturnValue([
   {
@@ -48,12 +48,12 @@ const listaDeProdutoresAtivosMock = jest.fn().mockReturnValue([
   },
 ]);
 
-const listaDeProdutoresVazia = jest.fn().mockReturnValue([]);
+const listaDeProdutoresVaziaMock = jest.fn().mockReturnValue([]);
 
 export {
   produtorMock,
-  produtorNaoEncontrado,
+  produtorNaoEncontradoMock,
   listaDeProdutoresAtivosMock,
-  listaDeProdutoresVazia,
+  listaDeProdutoresVaziaMock,
   produtorApagadoMock,
 };

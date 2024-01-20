@@ -5,6 +5,7 @@ import listarProdutores from "../controllers/produtores/listarProdutores";
 import detalharProdutor from "../controllers/produtores/detalharProdutor";
 import apagarProdutor from "../controllers/produtores/apagarProdutor";
 import reativarProdutor from "../controllers/produtores/reativarProdutor";
+import editarProdutor from "../controllers/produtores/editarProdutor";
 
 const produtoresRouter = Router();
 
@@ -30,6 +31,11 @@ produtoresRouter.delete(
 produtoresRouter.patch(
   "/:idProdutor/reativar",
   reativarProdutor.reativar.bind(reativarProdutor)
+);
+
+produtoresRouter.put(
+  "/:idProdutor",
+  editarProdutor.editar.bind(editarProdutor)
 );
 
 export default produtoresRouter;

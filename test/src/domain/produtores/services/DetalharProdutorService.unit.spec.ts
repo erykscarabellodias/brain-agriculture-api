@@ -4,7 +4,7 @@ import { AppError } from "../../../../../src/shared/erros/app.error";
 import ValidarUuidService from "../../../../../src/shared/services/validarUuid/ValidarUuidService";
 import {
   produtorMock,
-  produtorNaoEncontrado,
+  produtorNaoEncontradoMock,
 } from "../../../../mocks/produtor/produtoresMock";
 
 describe("suíte de testes do detalhamento de produtores", () => {
@@ -16,7 +16,7 @@ describe("suíte de testes do detalhamento de produtores", () => {
   );
 
   it("não deve ser possível detalhar um produtor que não existe", async () => {
-    produtorRepository.buscarPorId = produtorNaoEncontrado;
+    produtorRepository.buscarPorId = produtorNaoEncontradoMock;
 
     expect(async () => {
       await detalharProdutorService.detalhar(
