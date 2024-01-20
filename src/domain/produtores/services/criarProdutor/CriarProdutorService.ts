@@ -58,11 +58,11 @@ export class CriarProdutorService {
     if (cpf) {
       this.validarCpfService.validar(cpf);
 
-      const usuarioComMesmoCpfJaExiste = await this.repository.buscarPorCpf(
+      const produtorComMesmoCpfJaExiste = await this.repository.buscarPorCpf(
         cpf
       );
 
-      if (usuarioComMesmoCpfJaExiste) {
+      if (produtorComMesmoCpfJaExiste) {
         throw new AppError(
           400,
           "Já existe um produtor com este CPF cadastrado na plataforma"
@@ -73,11 +73,11 @@ export class CriarProdutorService {
     if (cnpj) {
       this.validarCnpjService.validar(cnpj);
 
-      const usuarioComMesmoCnpjJaExiste = await this.repository.buscarPorCnpj(
+      const produtorComMesmoCnpjJaExiste = await this.repository.buscarPorCnpj(
         cnpj
       );
 
-      if (usuarioComMesmoCnpjJaExiste) {
+      if (produtorComMesmoCnpjJaExiste) {
         throw new AppError(
           400,
           "Já existe um produtor com este CNPJ cadastrado na plataforma"
