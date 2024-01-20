@@ -1,4 +1,3 @@
-import ProdutorRepository from "../../../produtores/repositories/ProdutorRepository";
 import FazendaRepository from "../../repositories/FazendaRepository";
 import { AppError } from "../../../../shared/erros/app.error";
 import { validate } from "class-validator";
@@ -8,37 +7,26 @@ import ClassValidatorError from "../../../../shared/erros/class.validator.error"
 import DadosFazendaInputDto from "../dto/DadosFazendaInputDto";
 import DadosFazendaOutputDto from "../dto/DadosFazendaOutputDto";
 
-export default class CriarFazendaService {
-  private fazendaRepository: FazendaRepository;
-  private produtorRepository: ProdutorRepository;
-  private validarUuidService: ValidarUuidService;
-
+export default class EditarFazendaService {
   constructor(
-    fazendaRepository: FazendaRepository,
-    produtorRepository: ProdutorRepository,
-    validarUuidService: ValidarUuidService
-  ) {
-    this.fazendaRepository = fazendaRepository;
-    this.produtorRepository = produtorRepository;
-    this.validarUuidService = validarUuidService;
-  }
+    private readonly fazendaRepository: FazendaRepository,
+    private readonly validarUuidService: ValidarUuidService
+  ) {}
 
-  async criar(
-    idProdutor: string,
-    criarFazendaInputDto: DadosFazendaInputDto
+  async editar(
+    idFazenda: string,
+    dadosFazendaInputDto: DadosFazendaInputDto
   ): Promise<DadosFazendaOutputDto> {
-    this.validarUuidService.validar(idProdutor);
+    this.validarUuidService.validar(idFazenda);
 
-    const proprietarioDaFazenda = await this.produtorRepository.buscarPorId(
-      idProdutor
-    );
+    const fazenda = await this.fazendaRepository.buscarPorId(idFazenda);
 
-    if (!proprietarioDaFazenda) {
-      throw new AppError(400, "O produtor enviado não existe");
+    if (!fazenda) {
+      throw new AppError(404, "Esta fazenda não existe");
     }
 
     const errosDeValidacao = await validate(
-      plainToClass(DadosFazendaInputDto, criarFazendaInputDto)
+      plainToClass(DadosFazendaInputDto, dadosFazendaInputDto)
     );
 
     if (errosDeValidacao.length > 0) {
@@ -52,17 +40,17 @@ export default class CriarFazendaService {
       hectaresAgricultaveis,
       hectaresVegetacao,
       totalDeHectares,
-    } = criarFazendaInputDto;
+    } = dadosFazendaInputDto;
 
-    const fazendaJaEstaCadastrada =
-      await this.fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstado(
-        proprietarioDaFazenda,
+    const existeOutraFazendaIgualDoMesmoDono =
+      await this.fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstadoComOutroId(
+        fazenda,
         nomeFazenda,
         cidade,
         estado
       );
 
-    if (fazendaJaEstaCadastrada) {
+    if (existeOutraFazendaIgualDoMesmoDono.length !== 0) {
       throw new AppError(400, "Esta fazenda já está cadastrada");
     }
 
@@ -73,16 +61,16 @@ export default class CriarFazendaService {
       );
     }
 
-    const novaFazenda = await this.fazendaRepository.criar(
+    const fazendaAtualizada = await this.fazendaRepository.atualizar(
+      fazenda,
       nomeFazenda,
       cidade,
       estado,
       hectaresAgricultaveis,
       hectaresVegetacao,
-      totalDeHectares,
-      proprietarioDaFazenda
+      totalDeHectares
     );
 
-    return new DadosFazendaOutputDto(novaFazenda);
+    return new DadosFazendaOutputDto(fazendaAtualizada);
   }
 }

@@ -48,6 +48,27 @@ export default class FazendaRepository {
     });
   }
 
+  async buscarPorProdutorNomeFazendaCidadeEEstadoComOutroId(
+    fazenda: Fazenda,
+    nomeFazenda: string,
+    cidade: string,
+    estado: string
+  ) {
+    return this.repository.query(
+      `
+              SELECT f.*
+              FROM fazendas f
+              INNER JOIN produtores p ON p.id = f."produtorId"
+              WHERE f."nomeFazenda" = $1
+              AND f."estado" = $2
+              AND f."cidade" = $3
+              AND f.id <> $4
+              AND p.id = $5
+      `,
+      [nomeFazenda, estado, cidade, fazenda.id, fazenda.produtor.id]
+    );
+  }
+
   async buscarPorId(id: string): Promise<Fazenda | null> {
     return this.repository.findOne({
       where: { id },
@@ -68,5 +89,24 @@ export default class FazendaRepository {
     this.repository.save(fazenda);
 
     return fazenda;
+  }
+
+  async atualizar(
+    fazenda: Fazenda,
+    nomeFazenda: string,
+    cidade: string,
+    estado: string,
+    hectaresAgricultaveis: number,
+    hectaresVegetacao: number,
+    totalDeHectares: number
+  ) {
+    fazenda.nomeFazenda = nomeFazenda;
+    fazenda.cidade = cidade;
+    fazenda.estado = estado;
+    fazenda.hectaresAgricultaveis = hectaresAgricultaveis;
+    fazenda.hectaresVegetacao = hectaresVegetacao;
+    fazenda.totalDeHectares = totalDeHectares;
+
+    return this.repository.save(fazenda);
   }
 }

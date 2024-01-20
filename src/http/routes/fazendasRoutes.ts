@@ -2,6 +2,7 @@ import { Router } from "express";
 import detalharFazenda from "../controllers/fazendas/detalharFazenda";
 import apagarFazenda from "../controllers/fazendas/apagarFazenda";
 import reativarFazenda from "../controllers/fazendas/reativarFazenda";
+import editarFazenda from "../controllers/fazendas/editarFazenda";
 
 const fazendasRoutes = Router();
 
@@ -16,5 +17,7 @@ fazendasRoutes.patch(
   "/:idFazenda/reativar",
   reativarFazenda.apagar.bind(reativarFazenda)
 );
+
+fazendasRoutes.put("/:idFazenda", editarFazenda.editar.bind(editarFazenda));
 
 export default fazendasRoutes;
