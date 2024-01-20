@@ -5,7 +5,7 @@ import {
   listaDeProdutoresVazia,
 } from "../../../../mocks/produtor/produtoresMock";
 
-describe("suíte de testes da listagem de fazendas", () => {
+describe("suíte de testes da listagem de produtores", () => {
   const repository = new ProdutorRepository();
   const service = new ListarProdutoresService(repository);
 
