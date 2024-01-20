@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
 
-export default class CriarFazendaInputDto {
+export default class DadosFazendaInputDto {
   @IsString({ message: 'O campo "nomeFazenda" deve ser uma string' })
   @IsNotEmpty({ message: 'O campo "nomeFazenda" é obrigatório' })
   nomeFazenda: string;

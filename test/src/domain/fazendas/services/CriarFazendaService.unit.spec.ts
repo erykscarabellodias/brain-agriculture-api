@@ -1,6 +1,6 @@
 import FazendaRepository from "../../../../../src/domain/fazendas/repositories/FazendaRepository";
 import CriarFazendaService from "../../../../../src/domain/fazendas/services/criarFazenda/CriarFazendaService";
-import CriarFazendaInputDto from "../../../../../src/domain/fazendas/services/criarFazenda/dto/CriarFazendaInputDto";
+import DadosFazendaInputDto from "../../../../../src/domain/fazendas/services/dto/DadosFazendaInputDto";
 import ProdutorRepository from "../../../../../src/domain/produtores/repositories/ProdutorRepository";
 import { AppError } from "../../../../../src/shared/erros/app.error";
 import ValidarUuidService from "../../../../../src/shared/services/validarUuid/ValidarUuidService";
@@ -27,7 +27,7 @@ describe("suite de testes da criação de fazendas", () => {
   it("não deve ser possível criar uma fazenda para um produtor que não existe", async () => {
     produtorRepository.buscarPorId = fazendaNaoEncontradaMock;
 
-    const fazenda: CriarFazendaInputDto = {
+    const fazenda: DadosFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
       cidade: "São João da Boa Vista",
       estado: "SP",
@@ -146,7 +146,7 @@ describe("suite de testes da criação de fazendas", () => {
     fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstado =
       fazendaNaoEncontradaMock;
 
-    const fazenda: CriarFazendaInputDto = {
+    const fazenda: DadosFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
       cidade: "São João da Boa Vista",
       estado: "SP",
@@ -173,7 +173,7 @@ describe("suite de testes da criação de fazendas", () => {
       fazendaNaoEncontradaMock;
     fazendaRepository.criar = fazendaMock;
 
-    const fazenda: CriarFazendaInputDto = {
+    const fazenda: DadosFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
       cidade: "São João da Boa Vista",
       estado: "SP",
