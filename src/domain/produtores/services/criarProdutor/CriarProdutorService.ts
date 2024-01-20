@@ -1,12 +1,13 @@
 import { validate } from "class-validator";
 import { Produtor } from "../../entities/Produtor";
 import ProdutorRepository from "../../repositories/ProdutorRepository";
-import CriarProdutorInputDto from "./dto/CriarProdutorInputDto";
 import { plainToClass } from "class-transformer";
 import ClassValidatorError from "../../../../shared/erros/class.validator.error";
 import { AppError } from "../../../../shared/erros/app.error";
 import ValidarCpfService from "../../../../shared/services/validarCpf/ValidarCpfService";
 import ValidarCnpjService from "../../../../shared/services/validarCnpj/ValidarCnpjService";
+import DadosProdutorDto from "../../dto/DadosProdutorInputDto";
+import DadosProdutorInputDto from "../../dto/DadosProdutorInputDto";
 
 export class CriarProdutorService {
   private repository: ProdutorRepository;
@@ -23,26 +24,26 @@ export class CriarProdutorService {
     this.validarCnpjService = validarCnpjService;
   }
 
-  async criar(criarProdutorInputDto: CriarProdutorInputDto): Promise<Produtor> {
+  async criar(dadosProdutorInputDto: DadosProdutorInputDto): Promise<Produtor> {
     const errosDeValidacao = await validate(
-      plainToClass(CriarProdutorInputDto, criarProdutorInputDto)
+      plainToClass(DadosProdutorInputDto, dadosProdutorInputDto)
     );
 
     if (errosDeValidacao.length > 0) {
       throw new ClassValidatorError(errosDeValidacao);
     }
 
-    const { nomeProdutor, cpf, cnpj } = criarProdutorInputDto;
+    const { nomeProdutor, cpf, cnpj } = dadosProdutorInputDto;
 
-    await this.validarRecebimentoDoCpfOuCnpj(criarProdutorInputDto);
+    await this.validarRecebimentoDoCpfOuCnpj(dadosProdutorInputDto);
 
     return await this.repository.criar(nomeProdutor, cpf, cnpj);
   }
 
   private async validarRecebimentoDoCpfOuCnpj(
-    criarProdutorInputDto: CriarProdutorInputDto
+    dadosProdutorInputDto: DadosProdutorInputDto
   ): Promise<void> {
-    const { cpf, cnpj } = criarProdutorInputDto;
+    const { cpf, cnpj } = dadosProdutorInputDto;
 
     if (cpf && cnpj) {
       throw new AppError(
