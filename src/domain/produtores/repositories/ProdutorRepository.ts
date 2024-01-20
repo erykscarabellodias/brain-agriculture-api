@@ -20,11 +20,11 @@ export default class ProdutorRepository {
   }
 
   async buscarPorCpf(cpf: string): Promise<Produtor | null> {
-    return this.repository.findOneBy({ cpf });
+    return this.repository.findOne({ where: { cpf }, withDeleted: true });
   }
 
   async buscarPorCnpj(cnpj: string): Promise<Produtor | null> {
-    return this.repository.findOneBy({ cnpj });
+    return this.repository.findOne({ where: { cnpj }, withDeleted: true });
   }
 
   async buscarPorId(id: string) {
