@@ -36,10 +36,10 @@ describe("suíte de testes do service que apaga fazendas", () => {
     fazendaRepository.buscarPorId = fazendaMock;
     fazendaRepository.apagar = fazendaApagadaMock;
 
-    const fazendaApagado = await apagarFazendaService.apagar(
+    const fazendaApagada = await apagarFazendaService.apagar(
       "89f19678-9a3b-4c76-b963-378514ad4ea2"
     );
 
-    expect(fazendaApagado.deletedAt).not.toBeNull();
+    expect(fazendaApagada.deletedAt).not.toBeNull();
   });
 });
