@@ -1,4 +1,3 @@
-import { serialize } from "class-transformer";
 import FazendaRepository from "../../../../../src/domain/fazendas/repositories/FazendaRepository";
 import CriarFazendaService from "../../../../../src/domain/fazendas/services/criarFazenda/CriarFazendaService";
 import CriarFazendaInputDto from "../../../../../src/domain/fazendas/services/criarFazenda/dto/CriarFazendaInputDto";
@@ -12,7 +11,7 @@ import {
 import ClassValidatorError from "../../../../../src/shared/erros/class.validator.error";
 import {
   fazendaMock,
-  fazendaNaoEncontrada,
+  fazendaNaoEncontradaMock,
 } from "../../../../mocks/fazenda/fazendasMock";
 
 describe("suite de testes da criação de fazendas", () => {
@@ -26,7 +25,7 @@ describe("suite de testes da criação de fazendas", () => {
   );
 
   it("não deve ser possível criar uma fazenda para um produtor que não existe", async () => {
-    produtorRepository.buscarPorId = produtorNaoEncontradoMock;
+    produtorRepository.buscarPorId = fazendaNaoEncontradaMock;
 
     const fazenda: CriarFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
@@ -145,7 +144,7 @@ describe("suite de testes da criação de fazendas", () => {
   it("soma da área agricultável e da área de vegetação não pode ser maior que a área total", async () => {
     produtorRepository.buscarPorId = produtorMock;
     fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstado =
-      fazendaNaoEncontrada;
+      fazendaNaoEncontradaMock;
 
     const fazenda: CriarFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
@@ -171,7 +170,7 @@ describe("suite de testes da criação de fazendas", () => {
   it("deve ser possível criar uma fazenda", async () => {
     produtorRepository.buscarPorId = produtorMock;
     fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstado =
-      fazendaNaoEncontrada;
+      fazendaNaoEncontradaMock;
     fazendaRepository.criar = fazendaMock;
 
     const fazenda: CriarFazendaInputDto = {

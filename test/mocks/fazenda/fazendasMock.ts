@@ -16,6 +16,6 @@ const fazendaMock = jest.fn().mockReturnValue({
   },
 });
 
-const fazendaNaoEncontrada = jest.fn().mockReturnValue(null);
+const fazendaNaoEncontradaMock = jest.fn().mockReturnValue(null);
 
-export { fazendaMock, fazendaNaoEncontrada };
+export { fazendaMock, fazendaNaoEncontradaMock };
