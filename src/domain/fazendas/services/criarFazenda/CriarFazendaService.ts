@@ -6,6 +6,7 @@ import { validate } from "class-validator";
 import ValidarUuidService from "../../../../shared/services/validarUuid/ValidarUuidService";
 import { plainToClass } from "class-transformer";
 import ClassValidatorError from "../../../../shared/erros/class.validator.error";
+import CriarFazendaOutputDto from "./dto/CriarFazendaOutputDto";
 
 export default class CriarFazendaService {
   private fazendaRepository: FazendaRepository;

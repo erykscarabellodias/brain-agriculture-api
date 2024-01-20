@@ -27,8 +27,12 @@ export default class ProdutorRepository {
     return this.repository.findOneBy({ cnpj });
   }
 
-  async buscarPorId(idProdutor: string) {
-    return this.repository.findOneBy({ id: idProdutor });
+  async buscarPorId(id: string) {
+    return this.repository.findOne({
+      where: { id },
+      relations: ["fazendas"],
+      withDeleted: true,
+    });
   }
 
   async listar(desativadas: boolean) {

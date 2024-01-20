@@ -4,6 +4,7 @@ const produtorMock = jest.fn().mockReturnValue({
   cpf: "097.772.810-21",
   cnpj: null,
   deletedAt: null,
+  fazendas: [],
 });
 
 const produtorNaoEncontrado = jest.fn().mockReturnValue(null);
@@ -15,6 +16,18 @@ const listaDeProdutoresAtivosMock = jest.fn().mockReturnValue([
     cpf: "097.772.810-21",
     cnpj: null,
     deletedAt: null,
+    fazendas: [
+      {
+        id: "c03104f8-d49b-406f-ab40-a5f122785709",
+        nomeFazenda: "Fazenda Aliança",
+        estado: "SP",
+        cidade: "São João da Boa Vista",
+        totalDeHectares: 100,
+        hectaresAgricultaveis: 20,
+        hectaresVegetacao: 30,
+        deletedAt: null,
+      },
+    ],
   },
   {
     id: "2d8838cb-2023-472f-83b5-58ce370659f1",
@@ -22,6 +35,7 @@ const listaDeProdutoresAtivosMock = jest.fn().mockReturnValue([
     cpf: null,
     cnpj: "09.630.813/0001-30",
     deletedAt: null,
+    fazendas: [],
   },
 ]);
 
