@@ -77,7 +77,7 @@ describe("suíte de testes da criação de produtores", () => {
     );
   });
 
-  it("não deve ser possível criar um produtor um CPF que já existe", () => {
+  it("não deve ser possível criar um produtor um CNPJ que já existe", () => {
     repository.buscarPorCnpj = produtorMock;
 
     const produtor = {
