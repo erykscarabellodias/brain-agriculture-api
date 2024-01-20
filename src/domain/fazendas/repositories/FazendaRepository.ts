@@ -47,4 +47,12 @@ export default class FazendaRepository {
       },
     });
   }
+
+  async buscarPorId(id: string): Promise<Fazenda | null> {
+    return this.repository.findOne({
+      where: { id },
+      relations: ["produtor"],
+      withDeleted: true,
+    });
+  }
 }
