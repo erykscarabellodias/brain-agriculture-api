@@ -22,7 +22,10 @@ export default class CriarFazendaService {
     this.validarUuidService = validarUuidService;
   }
 
-  async criar(idProdutor: string, criarFazendaInputDto: CriarFazendaInputDto) {
+  async criar(
+    idProdutor: string,
+    criarFazendaInputDto: CriarFazendaInputDto
+  ): Promise<CriarFazendaOutputDto> {
     this.validarUuidService.validar(idProdutor);
 
     const proprietarioDaFazenda = await this.produtorRepository.buscarPorId(
@@ -69,7 +72,7 @@ export default class CriarFazendaService {
       );
     }
 
-    return await this.fazendaRepository.criar(
+    const novaFazenda = await this.fazendaRepository.criar(
       nomeFazenda,
       cidade,
       estado,
@@ -78,5 +81,7 @@ export default class CriarFazendaService {
       totalDeHectares,
       proprietarioDaFazenda
     );
+
+    return new CriarFazendaOutputDto(novaFazenda);
   }
 }
