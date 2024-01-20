@@ -55,4 +55,11 @@ export default class FazendaRepository {
       withDeleted: true,
     });
   }
+
+  async apagar(fazenda: Fazenda): Promise<Fazenda> {
+    fazenda.deletedAt = new Date();
+    this.repository.save(fazenda);
+
+    return fazenda;
+  }
 }
