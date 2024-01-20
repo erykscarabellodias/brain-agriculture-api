@@ -62,4 +62,11 @@ export default class FazendaRepository {
 
     return fazenda;
   }
+
+  async reativar(fazenda: Fazenda): Promise<Fazenda> {
+    fazenda.deletedAt = null;
+    this.repository.save(fazenda);
+
+    return fazenda;
+  }
 }

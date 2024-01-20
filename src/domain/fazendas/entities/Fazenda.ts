@@ -31,7 +31,7 @@ export default class Fazenda {
   hectaresVegetacao: number;
 
   @DeleteDateColumn()
-  deletedAt?: Date;
+  deletedAt?: Date | null;
 
   @ManyToOne(() => Produtor, (produtor) => produtor.fazendas)
   produtor: Produtor;
