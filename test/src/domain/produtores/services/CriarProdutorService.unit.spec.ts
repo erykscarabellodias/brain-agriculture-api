@@ -95,4 +95,23 @@ describe("suíte de testes da criação de produtores", () => {
       )
     );
   });
+
+  it("deve ser possível criar um produtor", async () => {
+    repository.buscarPorId = produtorMock;
+    repository.buscarPorCnpj = produtorNaoEncontradoMock;
+    repository.criar = produtorMock;
+
+    const dadosProdutor = {
+      nomeProdutor: "João",
+      cpf: "",
+      cnpj: "14.572.457/0001-85",
+    };
+
+    const produtorEditado = await service.criar(dadosProdutor);
+
+    expect(produtorEditado).toHaveProperty("id");
+    expect(produtorEditado).toHaveProperty("nomeProdutor");
+    expect(produtorEditado).toHaveProperty("cnpj");
+    expect(produtorEditado.deletedAt).toBeNull();
+  });
 });
