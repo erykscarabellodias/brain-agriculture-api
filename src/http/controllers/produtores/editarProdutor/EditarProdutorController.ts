@@ -10,6 +10,6 @@ export default class EditarProdutorController {
 
     const produtor = await this.editarProdutorService.editar(idProdutor, dto);
 
-    return response.status(201).send(produtor);
+    return response.send(produtor);
   }
 }
