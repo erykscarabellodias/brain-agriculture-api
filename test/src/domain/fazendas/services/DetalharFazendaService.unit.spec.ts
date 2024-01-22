@@ -41,5 +41,6 @@ describe("suíte de testes do detalhamento de fazendas", () => {
     expect(fazenda).toHaveProperty("hectaresVegetacao");
     expect(fazenda).toHaveProperty("deletedAt");
     expect(fazenda).toHaveProperty("produtor");
+    expect(fazenda).toHaveProperty("culturas");
   });
 });
