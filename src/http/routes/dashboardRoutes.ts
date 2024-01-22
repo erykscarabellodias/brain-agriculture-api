@@ -4,6 +4,7 @@ import totalDeFazendas from "../controllers/dashboard/totalDeFazendas";
 import areaTotalDeFazendas from "../controllers/dashboard/areaTotalDeFazendas";
 import fazendasPorEstado from "../controllers/dashboard/fazendasPorEstado";
 import percentualDeUsoDeSolo from "../controllers/dashboard/percentualDeUsoDeSolo";
+import fazendasPorCultura from "../controllers/dashboard/fazendasPorCultura";
 
 const dashboardRoutes = Router();
 
@@ -30,6 +31,11 @@ dashboardRoutes.get(
 dashboardRoutes.get(
   "/percentual-do-uso-de-solo",
   percentualDeUsoDeSolo.percentualDeUsoDeSolo.bind(percentualDeUsoDeSolo)
+);
+
+dashboardRoutes.get(
+  "/fazendas-por-cultura",
+  fazendasPorCultura.fazendasPorCultura.bind(fazendasPorCultura)
 );
 
 export default dashboardRoutes;
