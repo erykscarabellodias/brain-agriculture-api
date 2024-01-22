@@ -2,6 +2,7 @@ import { Router } from "express";
 import totalDeProdutores from "../controllers/dashboard/totalDeProdutores";
 import totalDeFazendas from "../controllers/dashboard/totalDeFazendas";
 import areaTotalDeFazendas from "../controllers/dashboard/areaTotalDeFazendas";
+import fazendasPorEstado from "../controllers/dashboard/fazendasPorEstado";
 
 const dashboardRoutes = Router();
 
@@ -18,6 +19,11 @@ dashboardRoutes.get(
 dashboardRoutes.get(
   "/area-total-de-fazendas",
   areaTotalDeFazendas.areaTotalDeFazendas.bind(areaTotalDeFazendas)
+);
+
+dashboardRoutes.get(
+  "/fazendas-por-estado",
+  fazendasPorEstado.fazendasPorEstado.bind(fazendasPorEstado)
 );
 
 export default dashboardRoutes;

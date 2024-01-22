@@ -163,4 +163,16 @@ export default class FazendaRepository {
       .where('produtor."deletedAt" IS NULL')
       .getRawOne();
   }
+
+  async fazendasPorEstado() {
+    return this.repository
+      .createQueryBuilder("fazenda")
+      .select("COUNT(fazenda.id)", "quantidade")
+      .addSelect("estado")
+      .innerJoin("fazenda.produtor", "produtor")
+      .where('produtor."deletedAt" IS NULL')
+      .groupBy("fazenda.estado")
+      .orderBy("estado", "ASC")
+      .getRawMany();
+  }
 }
