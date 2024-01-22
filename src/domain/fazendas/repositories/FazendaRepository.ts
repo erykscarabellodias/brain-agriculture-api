@@ -154,4 +154,13 @@ export default class FazendaRepository {
       .where('produtor."deletedAt" IS NULL')
       .getCount();
   }
+
+  async areaTotalDeFazendas() {
+    return this.repository
+      .createQueryBuilder("fazenda")
+      .select('SUM(fazenda."totalDeHectares")', "soma")
+      .innerJoin("fazenda.produtor", "produtor")
+      .where('produtor."deletedAt" IS NULL')
+      .getRawOne();
+  }
 }
