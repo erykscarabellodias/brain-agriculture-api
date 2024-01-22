@@ -3,6 +3,7 @@ import Fazenda from "../entities/Fazenda";
 import { appDataSource } from "../../../config/database/typeorm/data-source";
 import { v4 as uuid } from "uuid";
 import { Produtor } from "../../produtores/entities/Produtor";
+import Cultura from "../entities/Cultura";
 
 export default class FazendaRepository {
   private repository: Repository<Fazenda>;
@@ -72,7 +73,7 @@ export default class FazendaRepository {
   async buscarPorId(id: string): Promise<Fazenda | null> {
     return this.repository.findOne({
       where: { id },
-      relations: ["produtor"],
+      relations: ["produtor", "culturas"],
       withDeleted: true,
     });
   }
@@ -108,5 +109,27 @@ export default class FazendaRepository {
     fazenda.totalDeHectares = totalDeHectares;
 
     return this.repository.save(fazenda);
+  }
+
+  async verificarSeVinculoComCulturaJaExiste(
+    fazenda: Fazenda,
+    cultura: Cultura
+  ) {
+    return this.repository
+      .createQueryBuilder()
+      .select("fc.*")
+      .from("fazendas_culturas", "fc")
+      .where("fc.fazendaId = :idFazenda", { idFazenda: fazenda.id })
+      .andWhere("fc.culturaId = :idCultura", { idCultura: cultura.id })
+      .limit(1)
+      .getRawOne();
+  }
+
+  async vincularCultura(fazenda: Fazenda, novaCultura: Cultura) {
+    const fazendasAtuais = fazenda.culturas;
+
+    fazenda.culturas = [...fazendasAtuais, novaCultura];
+
+    this.repository.save(fazenda);
   }
 }

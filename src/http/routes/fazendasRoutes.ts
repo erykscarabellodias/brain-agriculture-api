@@ -3,6 +3,7 @@ import detalharFazenda from "../controllers/fazendas/detalharFazenda";
 import apagarFazenda from "../controllers/fazendas/apagarFazenda";
 import reativarFazenda from "../controllers/fazendas/reativarFazenda";
 import editarFazenda from "../controllers/fazendas/editarFazenda";
+import vincularCultura from "../controllers/fazendas/vincularCultura";
 
 const fazendasRoutes = Router();
 
@@ -19,5 +20,10 @@ fazendasRoutes.patch(
 );
 
 fazendasRoutes.put("/:idFazenda", editarFazenda.editar.bind(editarFazenda));
+
+fazendasRoutes.post(
+  "/:idFazenda/cultura",
+  vincularCultura.vincularCultura.bind(vincularCultura)
+);
 
 export default fazendasRoutes;

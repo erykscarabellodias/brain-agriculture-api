@@ -9,11 +9,6 @@ export class CriandoTabelaFazendasCulturas1705779876076
         name: "fazendas_culturas",
         columns: [
           {
-            name: "id",
-            type: "uuid",
-            isPrimary: true,
-          },
-          {
             name: "culturaId",
             type: "uuid",
           },

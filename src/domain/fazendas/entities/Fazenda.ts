@@ -40,7 +40,11 @@ export default class Fazenda {
   @ManyToOne(() => Produtor, (produtor) => produtor.fazendas)
   produtor: Produtor;
 
-  @ManyToMany(() => Cultura)
-  @JoinTable()
+  @ManyToMany(() => Cultura, (cultura) => cultura.fazendas)
+  @JoinTable({
+    name: "fazendas_culturas",
+    joinColumn: { name: "fazendaId", referencedColumnName: "id" },
+    inverseJoinColumn: { name: "culturaId", referencedColumnName: "id" },
+  })
   culturas: Cultura[];
 }
