@@ -146,4 +146,12 @@ export default class FazendaRepository {
       })
       .execute();
   }
+
+  async totalDeFazendas(): Promise<number> {
+    return this.repository
+      .createQueryBuilder("fazenda")
+      .innerJoin("fazenda.produtor", "produtor")
+      .where('produtor."deletedAt" IS NULL')
+      .getCount();
+  }
 }
