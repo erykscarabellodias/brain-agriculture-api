@@ -4,6 +4,7 @@ import apagarFazenda from "../controllers/fazendas/apagarFazenda";
 import reativarFazenda from "../controllers/fazendas/reativarFazenda";
 import editarFazenda from "../controllers/fazendas/editarFazenda";
 import vincularCultura from "../controllers/fazendas/vincularCultura";
+import desvincularCultura from "../controllers/fazendas/desvincularCultura";
 
 const fazendasRoutes = Router();
 
@@ -24,6 +25,11 @@ fazendasRoutes.put("/:idFazenda", editarFazenda.editar.bind(editarFazenda));
 fazendasRoutes.post(
   "/:idFazenda/cultura",
   vincularCultura.vincularCultura.bind(vincularCultura)
+);
+
+fazendasRoutes.delete(
+  "/:idFazenda/cultura/:idCultura",
+  desvincularCultura.desvincularCultura.bind(desvincularCultura)
 );
 
 export default fazendasRoutes;

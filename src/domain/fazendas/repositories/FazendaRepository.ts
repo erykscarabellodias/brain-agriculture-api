@@ -125,11 +125,25 @@ export default class FazendaRepository {
       .getRawOne();
   }
 
-  async vincularCultura(fazenda: Fazenda, novaCultura: Cultura) {
+  async vincularCultura(fazenda: Fazenda, novaCultura: Cultura): Promise<void> {
     const fazendasAtuais = fazenda.culturas;
 
     fazenda.culturas = [...fazendasAtuais, novaCultura];
 
     this.repository.save(fazenda);
+  }
+
+  async desvincularCultura(fazenda: Fazenda, cultura: Cultura): Promise<void> {
+    await this.repository
+      .createQueryBuilder("fazendas_culturas")
+      .delete()
+      .from("fazendas_culturas")
+      .where('fazendas_culturas."fazendaId" = :idFazenda', {
+        idFazenda: fazenda.id,
+      })
+      .andWhere('fazendas_culturas."culturaId" = :idCultura', {
+        idCultura: cultura.id,
+      })
+      .execute();
   }
 }
