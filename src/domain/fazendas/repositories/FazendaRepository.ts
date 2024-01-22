@@ -175,4 +175,22 @@ export default class FazendaRepository {
       .orderBy("estado", "ASC")
       .getRawMany();
   }
+
+  async areaDeVegetacaoTotal() {
+    return this.repository
+      .createQueryBuilder("fazenda")
+      .select('SUM(fazenda."hectaresVegetacao")', "areaDeVegetacaoTotal")
+      .innerJoin("fazenda.produtor", "produtor")
+      .where('produtor."deletedAt" IS NULL')
+      .getRawOne();
+  }
+
+  async areaAgricultavelTotal() {
+    return this.repository
+      .createQueryBuilder("fazenda")
+      .select('SUM(fazenda."hectaresAgricultaveis")', "areaAgricultavelTotal")
+      .innerJoin("fazenda.produtor", "produtor")
+      .where('produtor."deletedAt" IS NULL')
+      .getRawOne();
+  }
 }
