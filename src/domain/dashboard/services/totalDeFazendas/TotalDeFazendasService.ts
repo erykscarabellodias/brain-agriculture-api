@@ -4,6 +4,6 @@ export default class TotalDeFazendasService {
   constructor(private readonly repository: FazendaRepository) {}
 
   async calcular(): Promise<number> {
-    return this.repository.totalDeFazendas();
+    return await this.repository.totalDeFazendas();
   }
 }

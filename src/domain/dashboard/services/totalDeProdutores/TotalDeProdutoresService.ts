@@ -4,6 +4,6 @@ export default class TotalDeProdutoresService {
   constructor(private readonly repository: ProdutorRepository) {}
 
   async calcular(): Promise<number> {
-    return this.repository.totalDeProdutores();
+    return await this.repository.totalDeProdutores();
   }
 }
