@@ -7,7 +7,8 @@
     "dev": "ts-node-dev --inspect=0.0.0.0:7001 --ignore-watch --respawn ./src/server.ts",
     "run-migrations": "npx typeorm-ts-node-commonjs migration:run -d src/config/database/typeorm/data-source.ts",
     "typeorm": "typeorm-ts-node-commonjs",
-    "test": "jest"
+    "test": "jest",
+    "seed": "npx ts-node src/shared/seeds/typeorm/seed.ts"
   },
   "author": "erykscarabellodias",
   "license": "ISC",
