@@ -89,4 +89,8 @@ export default class ProdutorRepository {
       .withDeleted()
       .getOne();
   }
+
+  async totalDeProdutores(): Promise<number> {
+    return this.repository.count();
+  }
 }
