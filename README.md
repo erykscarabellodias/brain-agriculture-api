@@ -17,6 +17,7 @@ Os produtores são pessoas físicas e jurídicas que contam com seu CPF ou CNPJ 
 Para executar o projeto é necessário estar com a versão 20.11.0 do NodeJS instalado e rodar os seguintes passos:
 
 - Clonar a aplicação.
+- Criar um arquivo .env com base no .env.example com as variáveis de ambiente necessárias para a conexão com o banco de dados.
 - Executar o comando `docker-compose up -d` para iniciar o container com o banco de dados PostgreSQL que é utilizado pela aplicação para persistir os dados.
 - Instalar as dependências do projeto com o comando `npm install`.
 - Rodar as migrations do projeto com o comando `npm run run-migrations`.
