@@ -41,6 +41,6 @@ export default class PercentualDeUsoDeSoloService {
   }
 
   private arredondarPercentual(valor: number): string {
-    return valor.toFixed(2);
+    return valor ? valor.toFixed(2) : "0";
   }
 }
