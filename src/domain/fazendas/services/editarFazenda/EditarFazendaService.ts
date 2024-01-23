@@ -4,13 +4,15 @@ import { validate } from "class-validator";
 import ValidarUuidService from "../../../../shared/services/validarUuid/ValidarUuidService";
 import { plainToClass } from "class-transformer";
 import ClassValidatorError from "../../../../shared/erros/class.validator.error";
-import DadosFazendaInputDto from "../dto/DadosFazendaInputDto";
-import DadosFazendaOutputDto from "../dto/DadosFazendaOutputDto";
+import DadosFazendaInputDto from "../../dto/DadosFazendaInputDto";
+import DadosFazendaOutputDto from "../../dto/DadosFazendaOutputDto";
+import BuscarCepServiceInterface from "../../../../shared/services/buscarCep/BuscarCepServiceInterface";
 
 export default class EditarFazendaService {
   constructor(
     private readonly fazendaRepository: FazendaRepository,
-    private readonly validarUuidService: ValidarUuidService
+    private readonly validarUuidService: ValidarUuidService,
+    private readonly buscarCepService: BuscarCepServiceInterface
   ) {}
 
   async editar(
@@ -35,12 +37,13 @@ export default class EditarFazendaService {
 
     const {
       nomeFazenda,
-      cidade,
-      estado,
       hectaresAgricultaveis,
       hectaresVegetacao,
       totalDeHectares,
+      cep,
     } = dadosFazendaInputDto;
+
+    const { cidade, estado } = await this.buscarCepService.buscar(cep);
 
     const existeOutraFazendaIgualDoMesmoDono =
       await this.fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstadoComOutroId(

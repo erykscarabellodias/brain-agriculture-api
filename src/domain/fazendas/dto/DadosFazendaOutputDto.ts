@@ -1,5 +1,5 @@
-import { Produtor } from "../../../produtores/entities/Produtor";
-import Fazenda from "../../entities/Fazenda";
+import { Produtor } from "../../produtores/entities/Produtor";
+import Fazenda from "../entities/Fazenda";
 
 export default class DadosFazendaOutputDto {
   public id: string;

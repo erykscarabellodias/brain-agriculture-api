@@ -1,5 +1,5 @@
 import FazendaRepository from "../../../../../src/domain/fazendas/repositories/FazendaRepository";
-import DadosFazendaInputDto from "../../../../../src/domain/fazendas/services/dto/DadosFazendaInputDto";
+import DadosFazendaInputDto from "../../../../../src/domain/fazendas/dto/DadosFazendaInputDto";
 import { AppError } from "../../../../../src/shared/erros/app.error";
 import ValidarUuidService from "../../../../../src/shared/services/validarUuid/ValidarUuidService";
 import ClassValidatorError from "../../../../../src/shared/erros/class.validator.error";
@@ -9,22 +9,27 @@ import {
   listaVaziaDeFazendasMock,
 } from "../../../../mocks/fazenda/fazendasMock";
 import EditarFazendaService from "../../../../../src/domain/fazendas/services/editarFazenda/EditarFazendaService";
+import BuscarCepServiceViaCep from "../../../../../src/shared/services/buscarCep/BuscarCepViaCepService";
+import { cepEncontrado } from "../../../../mocks/cep/cepMock";
 
 describe("suite de testes da edição de fazendas", () => {
   const fazendaRepository = new FazendaRepository();
   const validarUuidService = new ValidarUuidService();
+  const buscarCepService = new BuscarCepServiceViaCep();
+
   const criarFazendaService = new EditarFazendaService(
     fazendaRepository,
-    validarUuidService
+    validarUuidService,
+    buscarCepService
   );
 
   it("não deve ser possível editar uma fazenda que não existe", async () => {
+    buscarCepService.buscar = cepEncontrado;
     fazendaRepository.buscarPorId = fazendaNaoEncontradaMock;
 
     const fazenda: DadosFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
-      cidade: "São João da Boa Vista",
-      estado: "SP",
+      cep: "13890000",
       hectaresAgricultaveis: 1000,
       hectaresVegetacao: 100,
       totalDeHectares: 800,
@@ -41,48 +46,35 @@ describe("suite de testes da edição de fazendas", () => {
     [
       {
         nomeFazenda: "",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: 1000,
         hectaresVegetacao: 100,
         totalDeHectares: 800,
       },
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "",
-        estado: "SP",
+        cep: "",
         hectaresAgricultaveis: 1000,
         hectaresVegetacao: 100,
         totalDeHectares: 800,
       },
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "",
-        hectaresAgricultaveis: 1000,
-        hectaresVegetacao: 100,
-        totalDeHectares: 800,
-      },
-      {
-        nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: "",
         hectaresVegetacao: 100,
         totalDeHectares: 800,
       },
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: 1000,
         hectaresVegetacao: "",
         totalDeHectares: 800,
       },
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: 1000,
         hectaresVegetacao: 100,
         totalDeHectares: "",
@@ -102,24 +94,21 @@ describe("suite de testes da edição de fazendas", () => {
     [
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: -1000,
         hectaresVegetacao: 100,
         totalDeHectares: 800,
       },
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: 1000,
         hectaresVegetacao: -100,
         totalDeHectares: 800,
       },
       {
         nomeFazenda: "Fazenda Aliança",
-        cidade: "São João da Boa Vista",
-        estado: "SP",
+        cep: "13890000",
         hectaresAgricultaveis: 1000,
         hectaresVegetacao: 100,
         totalDeHectares: -800,
@@ -136,14 +125,14 @@ describe("suite de testes da edição de fazendas", () => {
   });
 
   it("soma da área agricultável e da área de vegetação não pode ser maior que a área total", async () => {
+    buscarCepService.buscar = cepEncontrado;
     fazendaRepository.buscarPorId = fazendaMock;
     fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstadoComOutroId =
       listaVaziaDeFazendasMock;
 
     const fazenda: DadosFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
-      cidade: "São João da Boa Vista",
-      estado: "SP",
+      cep: "13890000",
       hectaresAgricultaveis: 1000,
       hectaresVegetacao: 400,
       totalDeHectares: 800,
@@ -162,6 +151,7 @@ describe("suite de testes da edição de fazendas", () => {
   });
 
   it("deve ser possível editar uma fazenda", async () => {
+    buscarCepService.buscar = cepEncontrado;
     fazendaRepository.buscarPorId = fazendaMock;
     fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstadoComOutroId =
       listaVaziaDeFazendasMock;
@@ -169,8 +159,7 @@ describe("suite de testes da edição de fazendas", () => {
 
     const fazenda: DadosFazendaInputDto = {
       nomeFazenda: "Fazenda Aliança",
-      cidade: "São João da Boa Vista",
-      estado: "SP",
+      cep: "13890000",
       hectaresAgricultaveis: 600,
       hectaresVegetacao: 400,
       totalDeHectares: 1000,

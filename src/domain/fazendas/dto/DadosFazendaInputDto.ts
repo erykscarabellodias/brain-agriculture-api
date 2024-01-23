@@ -1,17 +1,22 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+  Matches,
+} from "class-validator";
 
 export default class DadosFazendaInputDto {
   @IsString({ message: 'O campo "nomeFazenda" deve ser uma string' })
   @IsNotEmpty({ message: 'O campo "nomeFazenda" é obrigatório' })
   nomeFazenda: string;
 
-  @IsString({ message: 'O campo "estado" deve ser uma string' })
-  @IsNotEmpty({ message: 'O campo "estado" é obrigatório' })
-  estado: string;
-
-  @IsString({ message: 'O campo "cidade" deve ser uma string' })
-  @IsNotEmpty({ message: 'O campo "cidade" é obrigatório' })
-  cidade: string;
+  @IsString({ message: 'O campo "cep" deve ser uma string' })
+  @IsNotEmpty({ message: 'O campo "cep" é obrigatório' })
+  @Matches(/^[0-9]{5}-?[0-9]{3}$/, {
+    message: 'Envie o campo "cep" no formato 01153-000',
+  })
+  cep: string;
 
   @IsNumber(
     {},

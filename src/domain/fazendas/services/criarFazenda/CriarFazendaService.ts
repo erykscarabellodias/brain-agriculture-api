@@ -5,23 +5,18 @@ import { validate } from "class-validator";
 import ValidarUuidService from "../../../../shared/services/validarUuid/ValidarUuidService";
 import { plainToClass } from "class-transformer";
 import ClassValidatorError from "../../../../shared/erros/class.validator.error";
-import DadosFazendaInputDto from "../dto/DadosFazendaInputDto";
-import DadosFazendaOutputDto from "../dto/DadosFazendaOutputDto";
+import DadosFazendaInputDto from "../../dto/DadosFazendaInputDto";
+import DadosFazendaOutputDto from "../../dto/DadosFazendaOutputDto";
+import BuscarCepServiceViaCep from "../../../../shared/services/buscarCep/BuscarCepViaCepService";
+import BuscarCepServiceInterface from "../../../../shared/services/buscarCep/BuscarCepServiceInterface";
 
 export default class CriarFazendaService {
-  private fazendaRepository: FazendaRepository;
-  private produtorRepository: ProdutorRepository;
-  private validarUuidService: ValidarUuidService;
-
   constructor(
-    fazendaRepository: FazendaRepository,
-    produtorRepository: ProdutorRepository,
-    validarUuidService: ValidarUuidService
-  ) {
-    this.fazendaRepository = fazendaRepository;
-    this.produtorRepository = produtorRepository;
-    this.validarUuidService = validarUuidService;
-  }
+    private readonly fazendaRepository: FazendaRepository,
+    private readonly produtorRepository: ProdutorRepository,
+    private readonly validarUuidService: ValidarUuidService,
+    private readonly buscarCepService: BuscarCepServiceInterface
+  ) {}
 
   async criar(
     idProdutor: string,
@@ -47,12 +42,13 @@ export default class CriarFazendaService {
 
     const {
       nomeFazenda,
-      cidade,
-      estado,
       hectaresAgricultaveis,
       hectaresVegetacao,
       totalDeHectares,
+      cep,
     } = criarFazendaInputDto;
+
+    const { cidade, estado } = await this.buscarCepService.buscar(cep);
 
     const fazendaJaEstaCadastrada =
       await this.fazendaRepository.buscarPorProdutorNomeFazendaCidadeEEstado(
