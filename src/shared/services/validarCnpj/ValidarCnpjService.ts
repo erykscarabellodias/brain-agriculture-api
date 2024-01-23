@@ -44,19 +44,11 @@ export default class ValidarCnpjService {
       .reverse()
       .join("");
 
-    let multiplicacaoDosDozePrimeirosDigitos = 0;
-    let multiplicador = 2;
-
-    for (let i = 0; i < dozePrimeirosDigitosInvertidos.length; i++) {
-      multiplicacaoDosDozePrimeirosDigitos +=
-        parseInt(dozePrimeirosDigitosInvertidos[i]) * multiplicador;
-
-      if (multiplicador === 9) {
-        multiplicador = 2;
-      } else {
-        multiplicador++;
-      }
-    }
+    const multiplicacaoDosDozePrimeirosDigitos =
+      this.realizarCalculoDeMultiplicaçãoDeNumeros(
+        dozePrimeirosDigitosInvertidos,
+        2
+      );
 
     const restoDaDivisaoPorOnze = multiplicacaoDosDozePrimeirosDigitos % 11;
 
@@ -82,19 +74,11 @@ export default class ValidarCnpjService {
       .reverse()
       .join("");
 
-    let multiplicacaoDosTrezePrimeirosDigitos = 0;
-    let multiplicador = 2;
-
-    for (let i = 0; i < trezePrimeirosDigitosInvertidos.length; i++) {
-      multiplicacaoDosTrezePrimeirosDigitos +=
-        parseInt(trezePrimeirosDigitosInvertidos[i]) * multiplicador;
-
-      if (multiplicador === 9) {
-        multiplicador = 2;
-      } else {
-        multiplicador++;
-      }
-    }
+    const multiplicacaoDosTrezePrimeirosDigitos =
+      this.realizarCalculoDeMultiplicaçãoDeNumeros(
+        trezePrimeirosDigitosInvertidos,
+        2
+      );
 
     const restoDaDivisaoPorOnze = multiplicacaoDosTrezePrimeirosDigitos % 11;
 
@@ -109,5 +93,24 @@ export default class ValidarCnpjService {
     if (digitoVerificador.toString() != this.digitosVerificadores[1]) {
       throw new AppError(400, "CNPJ inválido");
     }
+  }
+
+  realizarCalculoDeMultiplicaçãoDeNumeros(
+    numerosParaMultiplicar: string,
+    multiplicadorInicial: number
+  ): number {
+    let acumulador = 0;
+
+    for (let i = 0; i < numerosParaMultiplicar.length; i++) {
+      acumulador += parseInt(numerosParaMultiplicar[i]) * multiplicadorInicial;
+
+      if (multiplicadorInicial === 9) {
+        multiplicadorInicial = 2;
+      } else {
+        multiplicadorInicial++;
+      }
+    }
+
+    return acumulador;
   }
 }
