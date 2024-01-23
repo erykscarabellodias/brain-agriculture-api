@@ -25,6 +25,8 @@ Para executar o projeto é necessário estar com a versão 20.11.0 do NodeJS ins
 - Rodar os seeds do projeto com o comando `npm run seed`. Este comando populará a tabela de culturas com os valores default delas.
 - rodar o comando `npm run dev` para iniciar o servidor da aplicação.
 
+Para facilitar, a collection de requests do insomnia está dentro da pasta /docs da aplicação. O arquivo pode ser importado para que não seja necessário recriar todas as requests.
+
 # Testes do projeto
 
 Com a aplicação clonada e as dependências instaladas é possível executar os testes unitários da aplicação com o comando `npm run test`. Todos os services de domínio da aplicação foram testados de forma unitária (com exceção dos relatórios), e maioria dos services compartilhados também.
