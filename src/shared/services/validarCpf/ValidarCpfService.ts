@@ -60,15 +60,11 @@ export default class ValidarCpfService {
   }
 
   private validarPrimeiroDigito() {
-    let multiplicacaoDosNovePrimeirosDigitos = 0;
-    let multiplicador = 10;
-
-    for (let i = 0; i < this.novePrimeirosDigitos.length; i++) {
-      multiplicacaoDosNovePrimeirosDigitos +=
-        parseInt(this.novePrimeirosDigitos[i]) * multiplicador;
-
-      multiplicador--;
-    }
+    const multiplicacaoDosNovePrimeirosDigitos =
+      this.realizarCalculoDeMultiplicaçãoDeNumeros(
+        this.novePrimeirosDigitos,
+        10
+      );
 
     const restoDaDivisaoDeVerificacao =
       (multiplicacaoDosNovePrimeirosDigitos * 10) % 11;
@@ -90,15 +86,8 @@ export default class ValidarCpfService {
     const dezPrimeirosDigitos =
       this.novePrimeirosDigitos + this.digitosVerificadores.at(0);
 
-    let multiplicador = 11;
-    let multiplicacaoDosDezPrimeirosDigitos = 0;
-
-    for (let i = 0; i < dezPrimeirosDigitos.length; i++) {
-      multiplicacaoDosDezPrimeirosDigitos +=
-        parseInt(dezPrimeirosDigitos[i]) * multiplicador;
-
-      multiplicador--;
-    }
+    const multiplicacaoDosDezPrimeirosDigitos =
+      this.realizarCalculoDeMultiplicaçãoDeNumeros(dezPrimeirosDigitos, 11);
 
     const restoDaDivisaoDeVerificacao =
       (multiplicacaoDosDezPrimeirosDigitos * 10) % 11;
@@ -114,5 +103,20 @@ export default class ValidarCpfService {
     if (digitoVerificador.toString() !== this.digitosVerificadores[1]) {
       throw new AppError(400, "CPF inválido");
     }
+  }
+
+  realizarCalculoDeMultiplicaçãoDeNumeros(
+    numerosParaMultiplicar: string,
+    multiplicadorInicial: number
+  ): number {
+    let acumulador = 0;
+
+    for (let i = 0; i < numerosParaMultiplicar.length; i++) {
+      acumulador += parseInt(numerosParaMultiplicar[i]) * multiplicadorInicial;
+
+      multiplicadorInicial--;
+    }
+
+    return acumulador;
   }
 }
