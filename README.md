@@ -34,3 +34,4 @@ Com a aplicação clonada e as dependências instaladas é possível executar os
 - Escrever testes de integração para a aplicação
 - Abstrairia o CPF e o CNPJ dos produtores para outras tabelas com acesso controlado
 - Criaria um mecanismo de autenticação para a aplicação
+- Criaria um ambiente dockerizado para a API
