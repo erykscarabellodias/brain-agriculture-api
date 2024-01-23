@@ -20,6 +20,7 @@ Para executar o projeto é necessário estar com a versão 20.11.0 do NodeJS ins
 - Criar um arquivo .env com base no .env.example com as variáveis de ambiente necessárias para a conexão com o banco de dados.
 - Executar o comando `docker-compose up -d` para iniciar o container com o banco de dados PostgreSQL que é utilizado pela aplicação para persistir os dados.
 - Instalar as dependências do projeto com o comando `npm install`.
+- Criar uma tabela com o nome de sua preferência para armazenar os dados do projeto no banco criado pelo docker.
 - Rodar as migrations do projeto com o comando `npm run run-migrations`.
 - Rodar os seeds do projeto com o comando `npm run seed`. Este comando populará as tabelas do banco com quatro produtores, oito fazendas, as cinco culturas e alguns vínculos entre fazendas e culturas. É crucial executar esta etapa, pois é nela que as culturas são cadastradas. Se quiser, você pode apagar os dados das demais tabelas posteriormente.
 - rodar o comando `npm run dev` para iniciar o servidor da aplicação.
