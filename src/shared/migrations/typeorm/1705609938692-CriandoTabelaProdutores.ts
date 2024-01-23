@@ -4,6 +4,8 @@ export class CriandoTabelaProdutores1705609938692
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createDatabase("brain-agriculture-app");
+
     await queryRunner.createTable(
       new Table({
         name: "produtores",
