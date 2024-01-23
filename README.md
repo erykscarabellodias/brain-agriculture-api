@@ -21,7 +21,7 @@ Para executar o projeto é necessário estar com a versão 20.11.0 do NodeJS ins
 - Executar o comando `docker-compose up -d` para iniciar o container com o banco de dados PostgreSQL que é utilizado pela aplicação para persistir os dados.
 - Instalar as dependências do projeto com o comando `npm install`.
 - Criar uma tabela com o nome de sua preferência para armazenar os dados do projeto no banco criado pelo docker.
-- Rodar as migrations do projeto com o comando `npm run run-migrations`.
+- Rodar as migrations do projeto com o comando `npm run migrations`.
 - Rodar os seeds do projeto com o comando `npm run seed`. Este comando populará a tabela de culturas com os valores default delas.
 - rodar o comando `npm run dev` para iniciar o servidor da aplicação.
 
